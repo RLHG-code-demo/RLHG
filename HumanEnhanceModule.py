@@ -14,7 +14,6 @@ class HumanEnhanceModule:
         self.monster_size = monster_size
         self.stat_size = stat_size
 
-        self.human_num = Config.human_num
         self.hero_dim = HumanEnhanceConfig.hero_dim
         self.unit_dim = HumanEnhanceConfig.unit_dim
         self.stat_dim = HumanEnhanceConfig.stat_dim
@@ -76,7 +75,7 @@ class HumanEnhanceModule:
         human_gain_list = []
         human_embedding_list = []
         with tf.variable_scope('HumanEnhance'):
-            for player_index in range(self.human_num):
+            for player_index in range(len(human_feature_list)):
                 feature_list = ['spatial', 'hero', 'monster', 'stat']
                 spatial, hero, monster, stat = [human_feature_list[player_index][k] for k in feature_list]
 

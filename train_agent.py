@@ -10,6 +10,7 @@ losses = []
 task_gate_placeholder = tf.placeholder(tf.float32, (1, ), name='task_gate')
 # Randomly select human-agent or agent-only mode.
 if random.random() <= AgentConfig.beta:
+    print('human-agent mode')
     task_gate = 1.0
     # If there are multiple humans, only one is randomly selected for enhancement.
     enhanced_human_index = random.choice(range(Config.human_num))
@@ -43,6 +44,7 @@ if random.random() <= AgentConfig.beta:
     human_loss = 0.5 * tf.reduce_mean(indicator * tf.square(human_real_gain - human_gain), axis=0)
     losses.append(tf.reduce_sum(human_loss))
 else:
+    print('agent-only mode')
     task_gate = 0.0
     fake_data = FakeData(batch_size=Config.batch_size, lstm_step=Config.lstm_step, human_num=0, agent_num=Config.max_player_num)
 

@@ -17,7 +17,6 @@ class Agent:
         self.stat_size = stat_size
         self.invisible_size = invisible_size
 
-        self.agent_num = Config.agent_num
         self.hero_dim = AgentConfig.hero_dim
         self.unit_dim = AgentConfig.unit_dim
         self.stat_dim = AgentConfig.stat_dim
@@ -119,7 +118,7 @@ class Agent:
             private_embed_list = []
             invisible_embed_list = []
             target_embed_list = []
-            for player_index in range(self.agent_num):
+            for player_index in range(len(agent_feature_list)):
                 one_target_embed_list = []
                 feature_list = ['spatial', 'hero', 'monster', 'turret', 'minion', 'stat', 'invisible']
                 spatial, hero, monster, turret, minion, stat, invisible = [agent_feature_list[player_index][k] for k in feature_list]
@@ -190,7 +189,7 @@ class Agent:
 
             # lstm
             lstm_human_list = []
-            for player_index in range(self.agent_num):
+            for player_index in range(len(agent_feature_list)):
                 player_embed_result_list = [reshape_pool_hero_public, private_embed_list[player_index]]
                 player_embed_result = tf.concat(player_embed_result_list, axis=1, name="embed_concat_result_%d" % player_index)
                 reshape_embed_result = tf.reshape(player_embed_result, [-1, self.lstm_time_steps, self.lstm_unit_size], name="reshape_embed_concat_result")
@@ -207,7 +206,7 @@ class Agent:
             agent_action_list = []
             agent_value_list = []
             # predict action and value
-            for player_index in range(self.agent_num):
+            for player_index in range(len(agent_feature_list)):
                 one_action_list = []
                 with tf.variable_scope("player%d_action" % player_index):
                     # action output
