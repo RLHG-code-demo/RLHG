@@ -1,4 +1,4 @@
-# RLHG -- Make You Better: Reinforcement Learning from Human Gain
+# RLHG -- Enhancing Human Experience in Human-Agent Collaboration: A Human-Centered Modeling Approach Based on Positive Human Gain
 
 ## Environmental Requirements
 - numpy == 1.18.5
